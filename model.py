@@ -1,30 +1,21 @@
-movies = {
-    "Batman": [
-        "Batman Begins",
-        "The Dark Knight",
-        "Man of Steel"
-    ],
+import pandas as pd
 
-    "Iron Man": [
-        "Avengers",
-        "Doctor Strange",
-        "Spider-Man"
-    ],
+# Load dataset
+df = pd.read_csv("movies.csv")
 
-    "Titanic": [
-        "Avatar",
-        "The Notebook",
-        "Romeo + Juliet"
-    ]
-}
-
+# User input
 movie = input("Enter a movie name: ")
 
-if movie in movies:
-    print("Recommended Movies:")
+# Find movie
+result = df[df["movie"].str.lower() == movie.lower()]
 
-    for recommendation in movies[movie]:
-        print("-", recommendation)
+if not result.empty:
+
+    print("\nRecommended Movies:")
+
+    print("-", result.iloc[0]["recommendation1"])
+    print("-", result.iloc[0]["recommendation2"])
+    print("-", result.iloc[0]["recommendation3"])
 
 else:
     print("Movie not found")
